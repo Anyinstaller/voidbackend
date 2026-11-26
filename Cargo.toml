@@ -1,0 +1,47 @@
+[package]
+name = "voidbackend"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.95"
+description = "The official AIP v1 backend for Anyinstaller"
+license = "MPL-2.0"
+repository = "https://github.com/Anyinstaller/voidbackend"
+
+[[bin]]
+name = "backend"
+path = "src/main.rs"
+
+[lib]
+name = "voidbackend"
+path = "src/lib.rs"
+
+[dependencies]
+anyhow = "1.0"
+crc32fast = "1.4"
+getrandom = "0.3"
+toml = "0.8"
+zip = { version = "9.8", default-features = false, features = ["deflate-flate2-zlib-rs"] }
+windows = { version = "0.62", features = [
+  "Win32_Foundation",
+  "Win32_Security",
+  "Win32_Security_Authorization",
+  "Win32_Storage_FileSystem",
+  "Win32_System_Com",
+  "Win32_System_IO",
+  "Win32_System_LibraryLoader",
+  "Win32_System_Pipes",
+  "Win32_System_WindowsProgramming",
+  "Win32_System_Threading",
+  "Win32_UI_Shell",
+  "Win32_UI_WindowsAndMessaging",
+] }
+
+[dev-dependencies]
+tempfile = "3.27"
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = "symbols"
+overflow-checks = true

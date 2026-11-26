@@ -1,0 +1,10 @@
+# AIP v1 requires Control Flow Guard for native components. ASLR, DEP, stack
+# protection and high-entropy VA are enabled by the x86_64 MSVC target. The CRT
+# is statically linked so backend.exe has no VCRUNTIME/MSVCP sidecar.
+[target.x86_64-pc-windows-msvc]
+rustflags = [
+  "-C",
+  "control-flow-guard=yes",
+  "-C",
+  "target-feature=+crt-static",
+]
